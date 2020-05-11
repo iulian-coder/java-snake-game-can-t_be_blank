@@ -1,7 +1,9 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.enemies.MouseEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
+import com.codecool.snake.entities.powerups.TreePowerUp;
 import com.codecool.snake.entities.snakes.Snake;
 import com.codecool.snake.eventhandler.InputHandler;
 
@@ -25,8 +27,8 @@ public class Game extends Pane {
 
     public void init() {
         spawnSnake();
-        spawnEnemies(4);
-        spawnPowerUps(4);
+        spawnEnemies(4, 2);
+        spawnPowerUps(4, 1);
 
         GameLoop gameLoop = new GameLoop(snake);
         Globals.getInstance().setGameLoop(gameLoop);
@@ -43,12 +45,18 @@ public class Game extends Pane {
         snake = new Snake(new Point2D(500, 500));
     }
 
-    private void spawnEnemies(int numberOfEnemies) {
-        for(int i = 0; i < numberOfEnemies; ++i) new SimpleEnemy();
+    private void spawnEnemies(int numberOfSimpleEnemies, int numberOfMouseEnemies) {
+        for(int i = 0; i < numberOfSimpleEnemies; ++i)
+            new SimpleEnemy();
+
+        for(int i = 0; i < numberOfMouseEnemies; ++i)
+            new MouseEnemy();
     }
 
-    private void spawnPowerUps(int numberOfPowerUps) {
+    private void spawnPowerUps(int numberOfPowerUps, int numberTreePowerUps) {
+
         for(int i = 0; i < numberOfPowerUps; ++i) new SimplePowerUp();
+        for(int i = 0; i < numberTreePowerUps; ++i) new TreePowerUp();
     }
 
     private void setupInputHandling() {

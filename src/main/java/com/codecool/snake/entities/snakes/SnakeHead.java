@@ -7,6 +7,7 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.enemies.Enemy;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
 
+import com.codecool.snake.entities.powerups.TreePowerUp;
 import javafx.geometry.Point2D;
 
 
@@ -30,6 +31,7 @@ public class SnakeHead extends GameEntity implements Interactable {
             headRotation = headRotation + turnRate;
         }
 
+
         // set rotation and position
         setRotate(headRotation);
         Point2D heading = Utils.directionToVector(headRotation, speed);
@@ -44,6 +46,11 @@ public class SnakeHead extends GameEntity implements Interactable {
             snake.changeHealth(((Enemy) entity).getDamage());
         }
         if(entity instanceof SimplePowerUp){
+            System.out.println(getMessage());
+            snake.addPart(2);
+        }
+
+        if(entity instanceof TreePowerUp){
             System.out.println(getMessage());
             snake.addPart(4);
         }
