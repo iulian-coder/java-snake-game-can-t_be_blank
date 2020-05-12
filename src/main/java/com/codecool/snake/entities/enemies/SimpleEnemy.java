@@ -27,7 +27,7 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);
 
-        int speed = 1;
+        int speed = 0;
         heading = Utils.directionToVector(direction, speed);
     }
 
@@ -44,8 +44,16 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
     public void apply(GameEntity entity) {
         if(entity instanceof SnakeHead){
             System.out.println(getMessage());
-            destroy();
+            setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
+            setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+
+            double direction = rnd.nextDouble() * 360;
+            setRotate(direction);
+
+            int speed = 0;
+            heading = Utils.directionToVector(direction, speed);
         }
+
     }
 
     @Override
