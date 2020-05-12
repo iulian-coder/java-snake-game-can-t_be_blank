@@ -2,6 +2,7 @@ package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.DelayedModificationList;
 import com.codecool.snake.Globals;
+import com.codecool.snake.PopupScreen;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.eventhandler.InputHandler;
@@ -16,6 +17,7 @@ public class Snake implements Animatable {
 
     private SnakeHead head;
     private DelayedModificationList<GameEntity> body;
+    private int lengthBodyPartsTotal = 0;
 
 
     public Snake(Point2D position) {
@@ -43,12 +45,14 @@ public class Snake implements Animatable {
     }
 
     public void addPart(int numParts) {
+
         GameEntity parent = getLastPart();
         Point2D position = parent.getPosition();
 
         for (int i = 0; i < numParts; i++) {
             SnakeBody newBodyPart = new SnakeBody(position);
             body.add(newBodyPart);
+            this.lengthBodyPartsTotal++;
         }
         Globals.getInstance().display.updateSnakeHeadDrawPosition(head);
     }
@@ -61,6 +65,8 @@ public class Snake implements Animatable {
         if (head.isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.getInstance().stopGame();
+            PopupScreen.display("Snake length " + this.lengthBodyPartsTotal + " ft.");
+
         }
     }
 
