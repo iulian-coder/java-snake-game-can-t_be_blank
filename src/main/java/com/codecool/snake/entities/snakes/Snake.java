@@ -25,6 +25,10 @@ public class Snake implements Animatable {
         addPart(4);
     }
 
+    public int getHealth() {
+        return health;
+    }
+
     public void step() {
         SnakeControl turnDir = getUserInput();
         head.updateRotation(turnDir, speed);
