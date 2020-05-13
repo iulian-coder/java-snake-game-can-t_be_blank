@@ -74,6 +74,8 @@ public class Game extends Pane {
 
     public void setRestartButton (Game game) {
         Button button = new Button("Restart");
+        // CSS inline
+        button.setStyle("-fx-background-color: yellow; -fx-text-fill: aqua");
         game.getChildren().add(button);
         ClickRestartHandler clickHandler = new ClickRestartHandler();
         button.setOnAction(clickHandler);
