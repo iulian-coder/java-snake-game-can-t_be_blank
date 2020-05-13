@@ -5,7 +5,6 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.Snake;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameLoop {
@@ -28,10 +27,11 @@ public class GameLoop {
 
     public void step() {
         if(running) {
-//            snake.step();
             for (Snake snake : snakes){
-                //check if is a game over
-                snake.step();
+                Globals.getInstance().game.checkGameOver();
+                if (snake.getHealth() > 0){
+                    snake.step();
+                }
             }
             for (GameEntity gameObject : Globals.getInstance().display.getObjectList()) {
                 if (gameObject instanceof Animatable) {
