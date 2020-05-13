@@ -17,17 +17,17 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage primaryStage) {
-        BorderPane bp = new BorderPane();
+//        BorderPane bp = new BorderPane();
         Game game = new Game();
-        Scene mainScene = new Scene(bp, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
+        Scene mainScene = new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         primaryStage.setTitle("Snake Game");
         primaryStage.setScene(mainScene);
-        Pane p =new Pane();
-        p.setPrefWidth(50);
-        p.setPrefHeight(50);
-        p.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,153), CornerRadii.EMPTY, Insets.EMPTY)));
-        bp.setCenter(game);
-        bp.setTop(p);
+//        Pane p =new Pane();
+//        p.setPrefWidth(50);
+//        p.setPrefHeight(50);
+//        p.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,153), CornerRadii.EMPTY, Insets.EMPTY)));
+//        bp.setCenter(game);
+//        bp.setTop(p);
         primaryStage.show();
         game.start();
     }
