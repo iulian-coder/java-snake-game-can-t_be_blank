@@ -30,19 +30,20 @@ public class Main extends Application {
         p.setBackground(new Background(new BackgroundFill(Color.rgb(255,255,153), CornerRadii.EMPTY, Insets.EMPTY)));
         bp.setCenter(game);
         bp.setTop(p);
-        Rectangle healthbar1 = new Rectangle();
-        healthbar1.setX(10);
-        healthbar1.setY(10);
-        healthbar1.setWidth(200);
-        healthbar1.setHeight(30);
+        Rectangle healthBarBackGround = new Rectangle();
+        healthBarBackGround.setX(10);
+        healthBarBackGround.setY(10);
+        healthBarBackGround.setWidth(210);
+        healthBarBackGround.setHeight(30);
 //        healthbar1.setStyle("-fx-border-style: solid; -fx-border-width: 5; -fx-border-color: red;");
-        Rectangle healthbar2 = new Rectangle();
-        healthbar2.setX(15);
-        healthbar2.setY(15);
-        healthbar2.setWidth(2*Game.getSnake().getHealth()); //!!!!!!!!!!!!!!!!!!!!!!!!
-        healthbar2.setHeight(20);
-        healthbar2.setFill(Color.BLUE);
-        p.getChildren().addAll(healthbar1, healthbar2);
+        Rectangle healthBarSnake = new Rectangle();
+        healthBarSnake.setX(15);
+        healthBarSnake.setY(15);
+        healthBarSnake.setWidth(2*Game.getSnakeHealth()); //!!!!!!!!!!!!!!!!!!!!!!!!
+        System.out.println(Game.getSnakeHealth());
+        healthBarSnake.setHeight(20);
+        healthBarSnake.setFill(Color.BLUE);
+        p.getChildren().addAll(healthBarBackGround, healthBarSnake);
 
         primaryStage.show();
 

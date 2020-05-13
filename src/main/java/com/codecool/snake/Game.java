@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 
 public class Game extends Pane {
-    private Snake snake = null;
+    private static Snake snake = null;
     private GameTimer gameTimer = new GameTimer();
 
 
@@ -23,8 +23,8 @@ public class Game extends Pane {
         init();
     }
 
-    public Snake getSnake() {
-        return snake;
+    public static int getSnakeHealth() {
+        return snake.getHealth();
     }
 
     public void init() {
