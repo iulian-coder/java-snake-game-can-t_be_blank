@@ -39,7 +39,7 @@ public class Main extends Application {
         Rectangle healthbar2 = new Rectangle();
         healthbar2.setX(15);
         healthbar2.setY(15);
-        healthbar2.setWidth(2*70); //!!!!!!!!!!!!!!!!!!!!!!!!
+        healthbar2.setWidth(2*Game.getSnake().getHealth()); //!!!!!!!!!!!!!!!!!!!!!!!!
         healthbar2.setHeight(20);
         healthbar2.setFill(Color.BLUE);
         p.getChildren().addAll(healthbar1, healthbar2);

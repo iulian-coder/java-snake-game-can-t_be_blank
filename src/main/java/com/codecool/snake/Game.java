@@ -23,6 +23,10 @@ public class Game extends Pane {
         init();
     }
 
+    public Snake getSnake() {
+        return snake;
+    }
+
     public void init() {
         spawnSnake();
         spawnEnemies(4);
