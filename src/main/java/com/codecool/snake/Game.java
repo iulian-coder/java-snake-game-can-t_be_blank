@@ -46,15 +46,6 @@ public class Game extends Pane {
         return healthBarSnake2;
     }
 
-    public int getSnakeHealth1() {
-      return snakes.get(0).getHealth();
-        
-    }
-    public int getSnakeHealth2(){
-        return snakes.get(1).getHealth();
-    }
-
-
 
         public void init(){
             spawnSnake();
@@ -147,10 +138,11 @@ public class Game extends Pane {
         }
         if (counter == 0){
             Globals.getInstance().stopGame();
-            PopupScreen.display("Snake 1 Score " + snakes.get(0).getLengthBodyPartsTotal() +" ft." +"\n"+
-                                "Snake 2 Score " + snakes.get(1).getLengthBodyPartsTotal() + " ft.");
+            Globals.getInstance().display.clear();
+            PopupScreen.displayGameOver(Globals.getInstance().game);
         }
     }
+
 
     public void setRestartButton (Game game) {
         Button button = new Button("Restart");
@@ -161,6 +153,4 @@ public class Game extends Pane {
         button.setOnAction(clickHandler);
         game.requestFocus();
     }
-
-
 }
