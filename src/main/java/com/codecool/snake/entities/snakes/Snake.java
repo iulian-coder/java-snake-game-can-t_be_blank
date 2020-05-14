@@ -94,13 +94,6 @@ public class Snake implements Animatable {
         }
     }
 
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
 
     public static float getSpeed() {
         return speed;
