@@ -6,10 +6,15 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+
+import java.util.List;
 import java.util.Random;
 
 import com.codecool.snake.entities.snakes.SnakeLaser;
+import javafx.animation.PathTransition;
 import javafx.geometry.Point2D;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class ChasingEnemy extends Enemy implements Interactable, Animatable {
 
@@ -17,24 +22,32 @@ public class ChasingEnemy extends Enemy implements Interactable, Animatable {
     private static Random rnd = new Random();
 
     public ChasingEnemy() {
-        super(10);
+        super(-20);
 
         setImage(Globals.getInstance().getImage("RedEnemy"));
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+
+        setStartCoordinates();
 
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);
 
-        int speed = 1;
+        int speed = 2;
         heading = Utils.directionToVector(direction, speed);
+
+//        Rectangle rectangle = new Rectangle(getX() + heading.getX(), getY() + heading.getY(),40, 75);
+//
+//        PathTransition transition = new PathTransition();
+//        transition.setNode(this);
+//        transition.setDuration(Duration.seconds(3));
+//        transition.setPath(rectangle);
+//        transition.setCycleCount(PathTransition.INDEFINITE);
+//        transition.play();
     }
 
     @Override
     public void step() {
         if (isOutOfBounds()) {
-            setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-            setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+            setStartCoordinates();
         }
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
@@ -45,6 +58,7 @@ public class ChasingEnemy extends Enemy implements Interactable, Animatable {
         if(entity instanceof SnakeHead){
             System.out.println(getMessage());
             destroy();
+            new ChasingEnemy();
         }
         if(entity instanceof SnakeLaser){
             destroy();
