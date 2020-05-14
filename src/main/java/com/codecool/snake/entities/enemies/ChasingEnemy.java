@@ -22,7 +22,7 @@ public class ChasingEnemy extends Enemy implements Interactable, Animatable {
     private static Random rnd = new Random();
 
     public ChasingEnemy() {
-        super(-20);
+        super(10);
 
         setImage(Globals.getInstance().getImage("RedEnemy"));
 

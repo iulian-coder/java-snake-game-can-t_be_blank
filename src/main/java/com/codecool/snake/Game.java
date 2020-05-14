@@ -13,6 +13,7 @@ import com.codecool.snake.eventhandler.InputHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -69,7 +70,9 @@ public class Game extends Pane {
 
         healthBarSnake1.setHeight(20);
         healthBarSnake1.setFill(Color.GREEN);
-        getChildren().addAll(healthBarBackGround1, healthBarSnake1);
+        Label healthValue1 = new Label(String.valueOf(Globals.getInstance().game.snakes.get(0).getHealth()));
+        Globals.getInstance().healthValue = healthValue1;
+        getChildren().addAll(healthBarBackGround1, healthBarSnake1, healthValue1);
         // Snake 2
         Rectangle healthBarBackGround2 = new Rectangle();
         healthBarBackGround2.setX(0);
@@ -112,7 +115,7 @@ public class Game extends Pane {
     private void spawnEnemies(int numberOfEnemies) {
         new SimpleEnemy();
         for (int i = 0; i < numberOfEnemies / 2; ++i) new ChasingEnemy();
-        for (int i = 0; i < numberOfEnemies / 2; ++i) new CirclingEnemy();
+        new CirclingEnemy();
     }
 
     private void spawnPowerUps(int numberOfPowerUps) {

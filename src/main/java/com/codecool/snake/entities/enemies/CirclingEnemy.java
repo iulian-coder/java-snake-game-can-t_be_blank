@@ -22,7 +22,7 @@ public class CirclingEnemy extends Enemy implements Interactable, Animatable {
     private static Random rnd = new Random();
 
     public CirclingEnemy() {
-        super(-5);
+        super(5);
 
         setImage(Globals.getInstance().getImage("BlueEnemy"));
 
