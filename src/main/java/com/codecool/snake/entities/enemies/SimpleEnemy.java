@@ -6,6 +6,8 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+
+import java.util.List;
 import java.util.Random;
 
 import com.codecool.snake.entities.snakes.SnakeLaser;
@@ -19,11 +21,11 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
     private static Random rnd = new Random();
 
     public SimpleEnemy() {
-        super(10);
+        super(-10);
 
-        setImage(Globals.getInstance().getImage("SimpleEnemy"));
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        setImage(Globals.getInstance().getImage("YellowEnemy"));
+
+        setStartCoordinates();
 
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);
@@ -35,8 +37,7 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
     @Override
     public void step() {
         if (isOutOfBounds()) {
-            setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-            setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+            setStartCoordinates();
         }
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
@@ -47,6 +48,7 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
         if(entity instanceof SnakeHead){
             System.out.println(getMessage());
             destroy();
+            new SimpleEnemy();
         }
         if(entity instanceof SnakeLaser){
             destroy();

@@ -6,10 +6,15 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+
+import java.util.List;
 import java.util.Random;
 
 import com.codecool.snake.entities.snakes.SnakeLaser;
+import javafx.animation.PathTransition;
 import javafx.geometry.Point2D;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 public class CirclingEnemy extends Enemy implements Interactable, Animatable {
 
@@ -17,24 +22,32 @@ public class CirclingEnemy extends Enemy implements Interactable, Animatable {
     private static Random rnd = new Random();
 
     public CirclingEnemy() {
-        super(10);
+        super(-5);
 
-        setImage(Globals.getInstance().getImage("YellowEnemy"));
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        setImage(Globals.getInstance().getImage("BlueEnemy"));
+
+        setStartCoordinates();
 
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);
 
         int speed = 1;
         heading = Utils.directionToVector(direction, speed);
+
+        Circle circle = new Circle(500, 300,  300);
+        PathTransition transition = new PathTransition();
+        transition.setNode(this);
+        transition.setDuration(Duration.seconds(3));
+        transition.setPath(circle);
+        transition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        transition.setCycleCount(PathTransition.INDEFINITE);
+        transition.play();
     }
 
     @Override
     public void step() {
         if (isOutOfBounds()) {
-            setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-            setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+            setStartCoordinates();
         }
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
@@ -45,6 +58,7 @@ public class CirclingEnemy extends Enemy implements Interactable, Animatable {
         if(entity instanceof SnakeHead){
             System.out.println(getMessage());
             destroy();
+            new CirclingEnemy();
         }
         if(entity instanceof SnakeLaser){
             destroy();
