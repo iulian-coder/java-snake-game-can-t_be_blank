@@ -19,6 +19,10 @@ public class GameLoop {
 //         this.snake = snake;
 //         this.game = game;
 
+    public List<Snake> getSnakes() {
+        return snakes;
+    }
+
     public GameLoop(List<Snake> snakes) {
         this.snakes = snakes;
     }
@@ -51,8 +55,10 @@ public class GameLoop {
             checkCollisions();
         }
         Globals.getInstance().display.frameFinished();
-      // updates HealthBar Snake1 
-        Globals.getInstance().game.getHealthBarSnake().setWidth(2*Globals.getInstance().game.getSnakeHealth());
+      // updates HealthBar
+        Globals.getInstance().game.getHealthBarSnake1().setWidth(2*Globals.getInstance().game.getSnakeHealth1());
+        Globals.getInstance().game.getHealthBarSnake2().setWidth(2*Globals.getInstance().game.getSnakeHealth2());
+
     }
 
     private void checkCollisions() {

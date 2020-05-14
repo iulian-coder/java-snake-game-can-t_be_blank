@@ -28,7 +28,8 @@ public class Game extends Pane {
     private int numberOfPlayers = 2;
 
 
-    Rectangle healthBarSnake = new Rectangle();
+    Rectangle healthBarSnake1 = new Rectangle();
+    Rectangle healthBarSnake2 = new Rectangle();
 
 
     public Game() {
@@ -38,36 +39,60 @@ public class Game extends Pane {
         init();
     }
 
-    public Rectangle getHealthBarSnake() {
-        return healthBarSnake;
+    public Rectangle getHealthBarSnake1() {
+        return healthBarSnake1;
+    }
+    public Rectangle getHealthBarSnake2() {
+        return healthBarSnake2;
     }
 
-    public int getSnakeHealth() {
-        return snake.getHealth();
+    public int getSnakeHealth1() {
+      return snakes.get(0).getHealth();
+        
+    }
+    public int getSnakeHealth2(){
+        return snakes.get(1).getHealth();
     }
 
-    public void init() {
-        spawnSnake();
-        spawnEnemies(4);
-        spawnPowerUps(4);
 
-        GameLoop gameLoop = new GameLoop(snakes);
-        Globals.getInstance().setGameLoop(gameLoop);
-        gameTimer.setup(gameLoop::step);
-        gameTimer.play();
-        Rectangle healthBarBackGround = new Rectangle();
-        healthBarBackGround.setX(10);
-        healthBarBackGround.setY(10);
-        healthBarBackGround.setWidth(210);
-        healthBarBackGround.setHeight(30);
-        healthBarSnake.setX(15);
-        healthBarSnake.setY(15);
-        healthBarSnake.setWidth(2*snake.getHealth());
 
-        healthBarSnake.setHeight(20);
-        healthBarSnake.setFill(Color.BLUE);
-        getChildren().addAll(healthBarBackGround, healthBarSnake);
-    }
+        public void init(){
+            spawnSnake();
+            spawnEnemies(4);
+            spawnPowerUps(4);
+
+            GameLoop gameLoop = new GameLoop(snakes);
+            Globals.getInstance().setGameLoop(gameLoop);
+            gameTimer.setup(gameLoop::step);
+            gameTimer.play();
+            Rectangle healthBarBackGround1 = new Rectangle();
+            healthBarBackGround1.setX(0);
+            healthBarBackGround1.setY(30);
+            healthBarBackGround1.setWidth(210);
+            healthBarBackGround1.setHeight(30);
+            healthBarSnake1.setX(5);
+            healthBarSnake1.setY(35);
+            healthBarSnake1.setWidth(2 * snakes.get(0).getHealth());
+
+            healthBarSnake1.setHeight(20);
+            healthBarSnake1.setFill(Color.GREEN);
+            getChildren().addAll(healthBarBackGround1, healthBarSnake1);
+            // Snake 2
+            Rectangle healthBarBackGround2 = new Rectangle();
+            healthBarBackGround2.setX(0);
+            healthBarBackGround2.setY(70);
+            healthBarBackGround2.setWidth(210);
+            healthBarBackGround2.setHeight(30);
+            healthBarSnake2.setX(5);
+            healthBarSnake2.setY(75);
+            healthBarSnake2.setWidth(2 * snakes.get(1).getHealth());
+
+            healthBarSnake2.setHeight(20);
+            healthBarSnake2.setFill(Color.PINK);
+            getChildren().addAll(healthBarBackGround2, healthBarSnake2);
+        }
+    
+    
 
     public void start() {
         setupInputHandling();
@@ -130,7 +155,7 @@ public class Game extends Pane {
     public void setRestartButton (Game game) {
         Button button = new Button("Restart");
         // CSS inline
-        button.setStyle("-fx-background-color: yellow; -fx-text-fill: aqua");
+        button.setStyle("-fx-background-color: yellow; -fx-text-fill: black");
         game.getChildren().add(button);
         ClickRestartHandler clickHandler = new ClickRestartHandler();
         button.setOnAction(clickHandler);
