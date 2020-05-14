@@ -15,7 +15,6 @@ import javafx.geometry.Point2D;
 public class SnakeHead extends GameEntity implements Interactable {
     private static final float turnRate = 2;
     private Snake snake;
-    public int healthBarSnake;
 
     public SnakeHead(Snake snake, Point2D position, String imageHead) {
         this.snake = snake;
@@ -32,6 +31,10 @@ public class SnakeHead extends GameEntity implements Interactable {
         }
         if (turnDirection.equals(SnakeControl.TURN_RIGHT)) {
             headRotation = headRotation + turnRate;
+        }
+
+        if (turnDirection.equals(SnakeControl.SHOOT)) {
+            new SnakeLaser(snake);
         }
 
         // set rotation and position

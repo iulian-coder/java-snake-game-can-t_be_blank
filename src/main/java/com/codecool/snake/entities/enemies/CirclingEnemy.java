@@ -8,6 +8,7 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import java.util.Random;
 
+import com.codecool.snake.entities.snakes.SnakeLaser;
 import javafx.geometry.Point2D;
 
 public class CirclingEnemy extends Enemy implements Interactable, Animatable {
@@ -43,6 +44,9 @@ public class CirclingEnemy extends Enemy implements Interactable, Animatable {
     public void apply(GameEntity entity) {
         if(entity instanceof SnakeHead){
             System.out.println(getMessage());
+            destroy();
+        }
+        if(entity instanceof SnakeLaser){
             destroy();
         }
     }
