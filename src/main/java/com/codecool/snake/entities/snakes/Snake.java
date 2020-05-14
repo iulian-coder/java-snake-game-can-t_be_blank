@@ -27,7 +27,6 @@ public class Snake implements Animatable {
         addPart(4);
     }
 
-
     public int getHealth() {
         return health;
     }
@@ -38,7 +37,6 @@ public class Snake implements Animatable {
         }
         this.health = health;
     }
-
 
     public void step() {
         SnakeControl turnDir = getUserInput();
@@ -64,6 +62,7 @@ public class Snake implements Animatable {
         SnakeControl turnDir = SnakeControl.INVALID;
         if(InputHandler.getInstance().isKeyPressed(KeyCode.LEFT)) turnDir = SnakeControl.TURN_LEFT;
         if(InputHandler.getInstance().isKeyPressed(KeyCode.RIGHT)) turnDir = SnakeControl.TURN_RIGHT;
+        if(InputHandler.getInstance().isKeyPressed(KeyCode.S)) turnDir = SnakeControl.SHOOT;
         return turnDir;
     }
 
@@ -71,6 +70,7 @@ public class Snake implements Animatable {
         SnakeControl turnDir = SnakeControl.INVALID;
         if(InputHandler.getInstance().isKeyPressed(KeyCode.A)) turnDir = SnakeControl.TURN_LEFT;
         if(InputHandler.getInstance().isKeyPressed(KeyCode.D)) turnDir = SnakeControl.TURN_RIGHT;
+        if(InputHandler.getInstance().isKeyPressed(KeyCode.S)) turnDir = SnakeControl.SHOOT;
         return turnDir;
     }
 
