@@ -5,16 +5,23 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.Snake;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameLoop {
-    private Snake snake;
+//    private Snake snake;
+    private List<Snake> snakes;
+
     private boolean running = false;
     private Game game;
 
-    public GameLoop(Snake snake) {
-        this.snake = snake;
-        this.game = game;
+
+//     public GameLoop(Snake snake) {
+//         this.snake = snake;
+//         this.game = game;
+
+    public GameLoop(List<Snake> snakes) {
+        this.snakes = snakes;
     }
 
     public void start() {
@@ -28,7 +35,12 @@ public class GameLoop {
     public void step() {
         if(running) {
 
-            snake.step();
+
+//             snake.step();
+            for (Snake snake : snakes){
+                //check if is a game over
+                snake.step();
+            }
             for (GameEntity gameObject : Globals.getInstance().display.getObjectList()) {
                 if (gameObject instanceof Animatable) {
                     ((Animatable) gameObject).step();
@@ -37,6 +49,7 @@ public class GameLoop {
             checkCollisions();
         }
         Globals.getInstance().display.frameFinished();
+      // updates HealthBar Snake1 
         Globals.getInstance().game.getHealthBarSnake().setWidth(2*Globals.getInstance().game.getSnakeHealth());
     }
 

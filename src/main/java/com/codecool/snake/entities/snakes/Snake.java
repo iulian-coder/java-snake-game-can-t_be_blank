@@ -2,6 +2,7 @@ package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.DelayedModificationList;
 import com.codecool.snake.Globals;
+import com.codecool.snake.PopupScreen;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.eventhandler.InputHandler;
@@ -11,17 +12,19 @@ import javafx.scene.input.KeyCode;
 
 
 public class Snake implements Animatable {
-    private static final float speed = 2;
+    private static float speed = 2;
     private int health = 100;
+    private int id;
 
     private SnakeHead head;
     private DelayedModificationList<GameEntity> body;
+    private int lengthBodyPartsTotal = 0;
 
 
-    public Snake(Point2D position) {
+    public Snake(Point2D position, int id) {
         head = new SnakeHead(this, position);
         body = new DelayedModificationList<>();
-
+        this.id = id;
         addPart(4);
     }
 
@@ -54,12 +57,14 @@ public class Snake implements Animatable {
     }
 
     public void addPart(int numParts) {
+
         GameEntity parent = getLastPart();
         Point2D position = parent.getPosition();
 
         for (int i = 0; i < numParts; i++) {
             SnakeBody newBodyPart = new SnakeBody(position);
             body.add(newBodyPart);
+            this.lengthBodyPartsTotal++;
         }
         Globals.getInstance().display.updateSnakeHeadDrawPosition(head);
     }
@@ -71,10 +76,23 @@ public class Snake implements Animatable {
         }
     }
 
+    public int getLengthBodyPartsTotal() {
+        return lengthBodyPartsTotal;
+    }
+
+    public static float getSpeed() {
+        return speed;
+    }
+
+    public static void setSpeed(float speed) {
+        Snake.speed = speed;
+    }
+
     private void checkForGameOverConditions() {
         if (head.isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.getInstance().stopGame();
+            PopupScreen.display("Snake length " + this.lengthBodyPartsTotal + " ft.");
         }
     }
 

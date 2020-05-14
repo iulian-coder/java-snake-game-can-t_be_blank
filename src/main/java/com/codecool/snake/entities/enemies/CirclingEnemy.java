@@ -10,24 +10,22 @@ import java.util.Random;
 
 import javafx.geometry.Point2D;
 
-
-
-public class SimpleEnemy extends Enemy implements Animatable, Interactable {
+public class CirclingEnemy extends Enemy implements Interactable, Animatable {
 
     private Point2D heading;
     private static Random rnd = new Random();
 
-    public SimpleEnemy() {
+    public CirclingEnemy() {
         super(10);
 
-        setImage(Globals.getInstance().getImage("SimpleEnemy"));
+        setImage(Globals.getInstance().getImage("YellowEnemy"));
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);
 
-        int speed = 0;
+        int speed = 1;
         heading = Utils.directionToVector(direction, speed);
     }
 
@@ -53,4 +51,6 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
     public String getMessage() {
         return (getDamage() + " damage");
     }
+
 }
+
