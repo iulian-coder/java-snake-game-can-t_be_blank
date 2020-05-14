@@ -20,13 +20,13 @@ public class Snake implements Animatable {
     private DelayedModificationList<GameEntity> body;
     private int lengthBodyPartsTotal = 0;
 
-
-    public Snake(Point2D position, int id) {
-        head = new SnakeHead(this, position);
+    public Snake(Point2D position, int id, String imageHead) {
+        head = new SnakeHead(this, position, imageHead);
         body = new DelayedModificationList<>();
         this.id = id;
         addPart(4);
     }
+
 
     public int getHealth() {
         return health;
@@ -39,12 +39,23 @@ public class Snake implements Animatable {
         this.health = health;
     }
 
+
     public void step() {
         SnakeControl turnDir = getUserInput();
+        switch (id){
+            case 0:
+                turnDir =getUserInput();
+                break;
+            case 1:
+                turnDir = getUserInputPlayer2();
+                break;
+            default:
+                System.out.println("System error direction");
+        }
+
         head.updateRotation(turnDir, speed);
 
         updateSnakeBodyHistory();
-        checkForGameOverConditions();
 
         body.doPendingModifications();
     }
@@ -53,6 +64,13 @@ public class Snake implements Animatable {
         SnakeControl turnDir = SnakeControl.INVALID;
         if(InputHandler.getInstance().isKeyPressed(KeyCode.LEFT)) turnDir = SnakeControl.TURN_LEFT;
         if(InputHandler.getInstance().isKeyPressed(KeyCode.RIGHT)) turnDir = SnakeControl.TURN_RIGHT;
+        return turnDir;
+    }
+
+    private SnakeControl getUserInputPlayer2() {
+        SnakeControl turnDir = SnakeControl.INVALID;
+        if(InputHandler.getInstance().isKeyPressed(KeyCode.A)) turnDir = SnakeControl.TURN_LEFT;
+        if(InputHandler.getInstance().isKeyPressed(KeyCode.D)) turnDir = SnakeControl.TURN_RIGHT;
         return turnDir;
     }
 
@@ -76,8 +94,12 @@ public class Snake implements Animatable {
         }
     }
 
-    public int getLengthBodyPartsTotal() {
-        return lengthBodyPartsTotal;
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public static float getSpeed() {
@@ -88,12 +110,12 @@ public class Snake implements Animatable {
         Snake.speed = speed;
     }
 
-    private void checkForGameOverConditions() {
-        if (head.isOutOfBounds() || health <= 0) {
-            System.out.println("Game Over");
-            Globals.getInstance().stopGame();
-            PopupScreen.display("Snake length " + this.lengthBodyPartsTotal + " ft.");
-        }
+    public SnakeHead getHead() {
+        return head;
+    }
+
+    public int getLengthBodyPartsTotal() {
+        return lengthBodyPartsTotal;
     }
 
     private void updateSnakeBodyHistory() {

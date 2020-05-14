@@ -17,9 +17,10 @@ public class SnakeHead extends GameEntity implements Interactable {
     private Snake snake;
     public int healthBarSnake;
 
-    public SnakeHead(Snake snake, Point2D position) {
+    public SnakeHead(Snake snake, Point2D position, String imageHead) {
         this.snake = snake;
-        setImage(Globals.getInstance().getImage("SnakeHead"));
+        setImage(Globals.getInstance().getImage(imageHead));
+
         setPosition(position);
     }
 
@@ -52,7 +53,7 @@ public class SnakeHead extends GameEntity implements Interactable {
         }
         if(entity instanceof DoubleLengthPowerUp){
             System.out.println(getMessage());
-            snake.addPart(snake.getLengthBodyPartsTotal() * 2);
+            snake.addPart(2);
         }
         if(entity instanceof SpeedBoostPowerUp){
             System.out.println(getMessage());

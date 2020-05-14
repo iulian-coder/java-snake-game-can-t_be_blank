@@ -22,10 +22,14 @@ import java.util.List;
 
 
 public class Game extends Pane {
-//    private Snake snake = null;
     private List<Snake> snakes = new ArrayList<>();
     private GameTimer gameTimer = new GameTimer();
+
+    private int numberOfPlayers = 2;
+
+
     Rectangle healthBarSnake = new Rectangle();
+
 
     public Game() {
         Globals.getInstance().game = this;
@@ -73,10 +77,20 @@ public class Game extends Pane {
 
     private void spawnSnake()
     {
-//        snake = new Snake(new Point2D(500, 500));
-        snakes.add(new Snake(new Point2D(500, 500), 0));
-        snakes.add(new Snake(new Point2D(400, 400), 1));
+        switch (numberOfPlayers){
+            default:
+                snakes.add(new Snake(new Point2D(500, 500), 0, "SnakeHead"));
+                break;
+            case 2:
+                snakes.add(new Snake(new Point2D(500, 500), 0, "SnakeHead"));
+                snakes.add(new Snake(new Point2D(400, 400), 1, "SnakeHead2"));
+                break;
+        }
 
+    }
+
+    public List<Snake> getSnakes() {
+        return snakes;
     }
 
     private void spawnEnemies(int numberOfEnemies) {
@@ -97,6 +111,22 @@ public class Game extends Pane {
         scene.setOnKeyReleased(event -> InputHandler.getInstance().setKeyReleased(event.getCode()));
     }
 
+
+    public void checkGameOver(){
+        int counter = numberOfPlayers;
+        for (Snake snake : snakes){
+            if (snake.getHead().isOutOfBounds() || snake.getHealth() <= 0){
+                snake.setHealth(0);
+                counter -=1;
+            }
+        }
+        if (counter == 0){
+            Globals.getInstance().stopGame();
+            PopupScreen.display("Snake 1 Score " + snakes.get(0).getLengthBodyPartsTotal() +" ft." +"\n"+
+                                "Snake 2 Score " + snakes.get(1).getLengthBodyPartsTotal() + " ft.");
+        }
+    }
+
     public void setRestartButton (Game game) {
         Button button = new Button("Restart");
         // CSS inline
@@ -106,5 +136,6 @@ public class Game extends Pane {
         button.setOnAction(clickHandler);
         game.requestFocus();
     }
+
 
 }
