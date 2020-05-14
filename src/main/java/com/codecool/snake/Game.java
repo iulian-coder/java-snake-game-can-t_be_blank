@@ -70,9 +70,7 @@ public class Game extends Pane {
 
         healthBarSnake1.setHeight(20);
         healthBarSnake1.setFill(Color.GREEN);
-        Label healthValue1 = new Label(String.valueOf(Globals.getInstance().game.snakes.get(0).getHealth()));
-        Globals.getInstance().healthValue = healthValue1;
-        getChildren().addAll(healthBarBackGround1, healthBarSnake1, healthValue1);
+        getChildren().addAll(healthBarBackGround1, healthBarSnake1);
         // Snake 2
         Rectangle healthBarBackGround2 = new Rectangle();
         healthBarBackGround2.setX(0);
