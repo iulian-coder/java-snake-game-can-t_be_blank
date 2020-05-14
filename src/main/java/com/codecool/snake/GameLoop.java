@@ -8,20 +8,10 @@ import com.codecool.snake.entities.snakes.Snake;
 import java.util.List;
 
 public class GameLoop {
-//    private Snake snake;
     private List<Snake> snakes;
 
     private boolean running = false;
-    private Game game;
 
-
-//     public GameLoop(Snake snake) {
-//         this.snake = snake;
-//         this.game = game;
-
-    public List<Snake> getSnakes() {
-        return snakes;
-    }
 
     public GameLoop(List<Snake> snakes) {
         this.snakes = snakes;
@@ -37,10 +27,6 @@ public class GameLoop {
 
     public void step() {
         if(running) {
-
-
-//             snake.step();
-
             for (Snake snake : snakes){
                 Globals.getInstance().game.checkGameOver();
                 if (snake.getHealth() > 0){
@@ -56,8 +42,8 @@ public class GameLoop {
         }
         Globals.getInstance().display.frameFinished();
       // updates HealthBar
-        Globals.getInstance().game.getHealthBarSnake1().setWidth(2*Globals.getInstance().game.getSnakeHealth1());
-        Globals.getInstance().game.getHealthBarSnake2().setWidth(2*Globals.getInstance().game.getSnakeHealth2());
+        Globals.getInstance().game.getHealthBarSnake1().setWidth(2*Globals.getInstance().game.getSnakes().get(0).getHealth());
+        Globals.getInstance().game.getHealthBarSnake2().setWidth(2*Globals.getInstance().game.getSnakes().get(1).getHealth());
 
     }
 
