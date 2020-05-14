@@ -13,6 +13,12 @@ public class GameLoop {
     private List<Snake> snakes;
 
     private boolean running = false;
+    private Game game;
+
+
+//     public GameLoop(Snake snake) {
+//         this.snake = snake;
+//         this.game = game;
 
     public GameLoop(List<Snake> snakes) {
         this.snakes = snakes;
@@ -28,7 +34,9 @@ public class GameLoop {
 
     public void step() {
         if(running) {
-//            snake.step();
+
+
+//             snake.step();
             for (Snake snake : snakes){
                 //check if is a game over
                 snake.step();
@@ -40,8 +48,9 @@ public class GameLoop {
             }
             checkCollisions();
         }
-
         Globals.getInstance().display.frameFinished();
+      // updates HealthBar Snake1 
+        Globals.getInstance().game.getHealthBarSnake().setWidth(2*Globals.getInstance().game.getSnakeHealth());
     }
 
     private void checkCollisions() {
