@@ -28,6 +28,18 @@ public class Snake implements Animatable {
     }
 
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        if (health > 100){
+            health=100;
+        }
+        this.health = health;
+    }
+
+
     public void step() {
         SnakeControl turnDir = getUserInput();
         switch (id){
@@ -77,6 +89,9 @@ public class Snake implements Animatable {
 
     public void changeHealth(int diff) {
         health += diff;
+        if (health>100){
+            health =100;
+        }
     }
 
     public int getHealth() {
