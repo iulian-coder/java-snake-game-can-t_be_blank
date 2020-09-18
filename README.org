@@ -1,6 +1,6 @@
 #+OPTIONS: toc:nil num:nil ^:nil
 #+TITLE: Snake game
-Educational project in Java and Javax - recreating the snake game with full 360 degree rotation.
+Educational project in Java and JavaFx - recreating the snake game with full 360 degree rotation
 
 
 
