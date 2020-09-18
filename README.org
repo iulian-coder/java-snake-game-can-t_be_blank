@@ -8,7 +8,8 @@ Educational project in Java and Javax - recreating the snake game with full 360 
 
 
 
-![alt text](Screenshots/shoot.jpg?raw=true)
+#+html: <p align="center"><img src="Screenshots/ScreenshotGame.png"/></p>
+
 
 
 
