@@ -4,7 +4,10 @@ Educational project in Java and Javax - recreating the snake game with full 360 
 
 
 
-** Screenshot
+** Screenshot  
+
+
+
 ![alt text](Screenshots/ScreenshotGame.png?raw=true)
 
 
