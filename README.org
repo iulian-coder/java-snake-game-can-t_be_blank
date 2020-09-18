@@ -5,7 +5,7 @@ Educational project in Java and Javax - recreating the snake game with full 360 
 
 
 ** Screenshot
-![Alt text](https://github.com/iulian-coder/java-snake-game-can-t_be_blank/blob/master/ScreenshotGame.jpg?raw=true "Screenshot Game")
+![Alt text](/java-snake-game-can-t_be_blank/blob/master/ScreenshotGame.jpg?raw=true "Screenshot Game")
 
 
 
